@@ -6,6 +6,12 @@ defmodule Tunez.Music.Artist do
     repo Tunez.Repo
   end
 
+  relationships do
+    has_many :albums, Tunez.Music.Album do
+      sort year_released: :desc
+    end
+  end
+
   attributes do
     uuid_primary_key :id
     attribute :name, :string do
