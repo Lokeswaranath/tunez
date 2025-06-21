@@ -8,6 +8,7 @@ defmodule TunezWeb.Albums.FormLive do
     socket =
       socket
       |> assign(:form, to_form(form))
+      |> assign(:artist, album.artist)
       |> assign(:page_title, "Update Album")
     {:ok, socket}
   end
