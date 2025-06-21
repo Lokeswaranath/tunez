@@ -39,4 +39,14 @@ defmodule Tunez.Music.Album do
       accept [:name, :year_released, :cover_image_url]
     end
   end
+
+  validations do
+    validate numericality(:year_released, greater_than_or_equal_to: 1950), where: [present(:year_released)], message: "must be a valid year after 1950"
+    validate match(:cover_image_url, ~r"(^https://|/images/).+\.(jpg|jpeg|png|gif)$"), where: [present(:cover_image_url)], message: "must be a valid image URL starting with 'https://' or '/images/' and ending with .jpg, .jpeg, .png, or .gif"
+  end
+
+  identities do
+    identity :unique_album_name_per_artist, [:name, :artist_id], message: "An album with this name already exists for this artist"
+  end
+
 end
